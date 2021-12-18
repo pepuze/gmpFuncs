@@ -180,17 +180,29 @@ void measureFuncTimeFloat(std::chrono::nanoseconds func(const T*, const unsigned
 
 //генерация массива типа double в диапазоне [l; r] (0 < l <= r)
 void rand_fArray(double* arr, unsigned int size, double l, double r){
+    auto start = std::chrono::steady_clock::now();
     for (unsigned int i = 0; i < size; ++i) {
         arr[i] = l + (double)(static_cast<float> (rand() / static_cast <float> (RAND_MAX / (r - l))));
     }
+    auto end = std::chrono::steady_clock::now();
+    auto deltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+    std::cout << "Array generation time:\n";
+    std::cout << deltaTime.count()/1000000 << " milliseconds\n";
+    std::cout << deltaTime.count() << " nanoseconds\n\n";
     return;
 }
 
 //генерация массива типа unsigned int в диапазоне [l; r] (0 < l <= r)
 void rand_iArray(unsigned int* arr, unsigned int size, unsigned int l, unsigned int r){
+    auto start = std::chrono::steady_clock::now();
     for(unsigned int i = 0; i < size; ++i){
         arr[i] = l + (rand() % ( r - l + 1 ));
     }
+    auto end = std::chrono::steady_clock::now();
+    auto deltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+    std::cout << "Array generation time:\n";
+    std::cout << deltaTime.count()/1000000 << " milliseconds\n";
+    std::cout << deltaTime.count() << " nanoseconds\n\n";
     return;
 }
 
