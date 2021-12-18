@@ -231,7 +231,7 @@ bool checkArrayInLims(const T* arr, const unsigned int size, const T leftLim, co
 bool checkSize(std::string size){
     if(size.find_first_not_of("1234567890.") != -1) return 0;
     double sizeDb = stod(size);
-    if(sizeDb < 1 || round(sizeDb) != sizeDb) return 0;
+    if(sizeDb < 1 || round(sizeDb) != sizeDb || sizeDb > 400000000) return 0;
     return 1;
 }
 
@@ -272,7 +272,7 @@ int main()
         for(char& c : type) c = tolower(c);
 
         if(type == "int" || (type.length() == 1 && type[0] == 'i')){
-            std::cout << "Enter array size:\n";
+            std::cout << "Enter array size (Maximum = 400000000):\n";
             std::cin >> sizeStr;
 //Int
             if(!checkSize(sizeStr)){
@@ -314,7 +314,7 @@ int main()
 //Float
         else if (type == "float" || (type.length() == 1 && type[0] == 'f')){
             double leftLim, rightLim;
-            std::cout << "Enter array size:\n";
+            std::cout << "Enter array size (Maximum = 400000000):\n";
             std::cin >> sizeStr;
 
             if(!checkSize(sizeStr)){
