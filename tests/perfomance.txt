@@ -1,0 +1,24 @@
+Perfomance tests (Average; based on 100 tests):
+1)	Int 
+	Array size = 1000000
+	Range = [10; 100000]
+	Stats:
+		RAM usage: 16MB
+		Array geneneration time: 27ms (27543000 ns)
+		Sum calculation time: 16 ms (16744000 ns)
+		Difference calculation time: < 0 ms ( < 0 ns)
+		Product calculation time: 319720 ms (319720207000 ns)
+		Quotient calculation time: 15 ms (15576000 ns)
+
+2)	Float
+	Array size = 100000
+	Range = [10; 1000]
+	Precision: default (0.5 MB)
+	Stats:
+		RAM usage: 9MB
+		Array geneneration time: 1ms (1032000 ns)
+		Sum calculation time: 47 ms (47995000 ns)
+		Difference calculation time: 47 ms (47985000 ns)
+		Product calculation time: 7837 ms (7837310000 ns)
+		Quotient calculation time: 34501 ms (34501012000 ns)
+		

@@ -216,6 +216,16 @@ void printArray(const T* arr, const unsigned int size){
     }
 }
 
+template <class T>
+bool checkArrayInLims(const T* arr, const unsigned int size, const T leftLim, const T rightLim){
+    for (unsigned int i = 0; i < size; ++i){
+        if(arr[i] > rightLim || arr[i] < leftLim){
+            std::cout << arr[i] << "\n";
+            return 0;
+        }
+    }
+    return 1;
+}
 
 //Проверка введенного размера
 bool checkSize(std::string size){
@@ -226,10 +236,17 @@ bool checkSize(std::string size){
 }
 
 //Проверка введенных границ
-bool checkLims(std::string leftLim, std::string rightLim){
+bool checkLimsInt(std::string leftLim, std::string rightLim){
     if(leftLim.find_first_not_of("1234567890.") != -1 || rightLim.find_first_not_of("1234567890." )!= -1) return 0;
     double ll = stod(leftLim), lr = stod(rightLim);
     if(ll <= 0 || ceil(ll) > floor(lr)) return 0;
+    return 1;
+}
+
+bool checkLimsFloat(std::string leftLim, std::string rightLim){
+    if(leftLim.find_first_not_of("1234567890.") != -1 || rightLim.find_first_not_of("1234567890." )!= -1) return 0;
+    double ll = stod(leftLim), lr = stod(rightLim);
+    if(ll <= 0 || ll > lr) return 0;
     return 1;
 }
 
@@ -267,7 +284,7 @@ int main()
             std::cout << "Enter array range [a; b] (a > 0):\n";
             std::cin >> leftLimStr >> rightLimStr;
 
-            if(!checkLims(leftLimStr, rightLimStr)){
+            if(!checkLimsInt(leftLimStr, rightLimStr)){
                 std::cout << "Invalid range\n\n";
                 continue;
             }
@@ -276,7 +293,11 @@ int main()
 
             unsigned int* arr = new unsigned int[size];
             rand_iArray(arr, size, (unsigned int)(ceil(leftLim)), (unsigned int)(floor(rightLim)));
-            //printArray(arr, size);
+            if(!checkArrayInLims(arr, size, (unsigned int)(ceil(leftLim)), (unsigned int)(floor(rightLim)))){
+                std::cout << "Error\nFound an array element out of bounds\n\n";
+                printArray(arr, size);
+                continue;
+            };
 
             std::cout << "Sum: ";
             measureFuncTimeInt(sumArr_i, arr, size);
@@ -305,7 +326,7 @@ int main()
             std::cout << "Enter array range [a; b] (a > 0):\n";
             std::cin >> leftLimStr >> rightLimStr;
 
-            if(!checkLims(leftLimStr, rightLimStr)){
+            if(!checkLimsFloat(leftLimStr, rightLimStr)){
                 std::cout << "Invalid range\n\n";
                 continue;
             }
@@ -323,7 +344,11 @@ int main()
 
             double* arr = new double[size];
             rand_fArray(arr, size, leftLim, rightLim);
-            //printArray(arr, size);
+            if(!checkArrayInLims(arr, size, leftLim, rightLim)){
+                std::cout << "Error\nFound an array element out of bounds\n\n";
+                printArray(arr, size);
+                continue;
+            };
 
             std::cout << "Sum: ";
             measureFuncTimeFloat(sumArr_f, arr, size, precInt);
