@@ -203,7 +203,7 @@ void rand_iArray(unsigned int* arr, unsigned int size, unsigned int l, unsigned 
     std::cout << "Array generation time:\n";
     std::cout << deltaTime.count()/1000000 << " milliseconds\n";
     std::cout << deltaTime.count() << " nanoseconds\n\n";
-    return;
+    return; 
 }
 
 template <class T>
@@ -219,7 +219,7 @@ void printArray(const T* arr, const unsigned int size){
 template <class T>
 bool checkArrayInLims(const T* arr, const unsigned int size, const T leftLim, const T rightLim){
     for (unsigned int i = 0; i < size; ++i){
-        if(arr[i] > rightLim || arr[i] < leftLim){
+        if(arr[i] - 0.1 > rightLim || arr[i] + 0.1 < leftLim){
             std::cout << arr[i] << "\n";
             return 0;
         }
